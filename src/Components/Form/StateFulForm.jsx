@@ -4,13 +4,18 @@ export default function StateFulForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(name);
-        console.log(email);
-        console.log(password);
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long");
+            return;
+        }
+        else {
+            console.log(name, email, password);
+        }
+
     }
     const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [password, setPassword] = useState('');
     const handleEmailChange = (e) => {
         console.log(e.target.value);
         setEmail(e.target.value);
@@ -31,8 +36,12 @@ export default function StateFulForm() {
                 <input type="text" name="name" onChange={handleNameChange} required />  <br />
                 <input type="email" name="email" onChange={handleEmailChange} /> <br />
                 <input type="password" name="password" onChange={handlePasswordChange} /> <br />
+                {
+                    password.length < 6 && <p style={{ color: 'red' }} >At least 6 charecters</p>
+                }
                 <input type="submit" />
             </form>
+
         </div >
 
     )
